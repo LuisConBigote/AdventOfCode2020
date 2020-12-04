@@ -1,4 +1,4 @@
-file = open("../input/two")
+file = open("./input/two")
 
 counterFirst = 0
 counterSecond = 0
