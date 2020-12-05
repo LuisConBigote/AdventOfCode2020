@@ -1,17 +1,36 @@
-matrix = [line.strip() for line in open("./input/three")]
+file = open("./input/three")
 
-slopes = [(1,1), (3,1), (5,1), (7,1), (1,2)]
+matrix = []
 
-res = 1
+for line in file:
+    matrix.append(line.strip())
 
-for slope in slopes:
-    trees = 0
-    x, y = 0, 0
-    while y < len(matrix) - 1:
-        x = (x + slope[0]) % len(matrix[0])
-        y += slope[1]
-        if matrix[y][x] == "#":
-            trees += 1
-    res *= trees
+rA = rB = rC = rD = rE = 0
+cA = cB = cC = cD = cE = 0
 
-print(res)
+def check(spot):
+    if spot == "#":
+        return 1
+    else:
+        return 0
+
+for count, row in enumerate(matrix):
+    if count % 2 == 0:
+        spot = row[(rE) % len(row)]
+        rE += 1
+        cE += check(spot)
+
+    spotA = row[(rA) % len(row)]
+    cA += check(spotA)
+    rA += 1
+    spotB = row[(rB) % len(row)]
+    cB += check(spotB)
+    rB += 3
+    spotC = row[(rC) % len(row)]
+    cC += check(spotC)
+    rC += 5
+    spotD = row[(rD) % len(row)]
+    cD += check(spotD)
+    rD += 7
+
+print(cA*cB*cC*cD*cE)
