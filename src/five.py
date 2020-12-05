@@ -9,4 +9,8 @@ for seat in seats:
     column = int(convert(seat[-3:]),base=2)
     IDs.append(row * 8 + column)
 
-print(set(range(10000)).difference(set(IDs)))
+first_s = sorted(IDs, reverse=True)[0]
+second_s = list(set(range(first_s - 1)).difference(set(IDs)))[-1]
+
+print("First solution: ", first_s)
+print("Second solution: ", second_s)
